@@ -1,0 +1,30 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["Pilotage RUN/TMA","KPI","Users","Temps renseignés","Taux Occup","Bridge Tasks","Référentiel clients","Interventions ponctuelles"]
+
+annotation __LastRPTime = 133994601090767084
+
+annotation PBI_ProTooling = ["WebModelingEdit","DevMode"]
+
+ref table KPI
+ref table Users
+ref table 'Temps renseignés'
+ref table CalendarTable
+ref table 'Taux Occup'
+ref table 'Pilotage RUN/TMA'
+ref table 'Bridge Tasks'
+ref table 'TopN Table'
+ref table 'Référentiel clients'
+ref table 'Valeur ou %'
+ref table 'Interventions ponctuelles'
+
+ref cultureInfo en-US
+

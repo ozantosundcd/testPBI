@@ -1,0 +1,33 @@
+relationship 45663088-5279-1422-c64e-c589562b5888
+	fromColumn: 'Taux Occup'.Assigné_ID
+	toColumn: Users.'User ID'
+
+relationship c7c3218f-fed7-27c0-cd52-2e0c280b27db
+	fromColumn: 'Temps renseignés'.Task_GID
+	toColumn: 'Bridge Tasks'.'Task Id'
+
+relationship a69bcdea-6209-cf07-5e88-d47eaeff1a4a
+	fromColumn: 'Pilotage RUN/TMA'.'Task Id'
+	toColumn: 'Bridge Tasks'.'Task Id'
+
+relationship 682e29e8-0369-ca37-3832-d9249f9a522e
+	fromColumn: 'Temps renseignés'.'Created_By.GID'
+	toColumn: Users.'User ID'
+
+relationship 153bd582-fbc8-9d3d-7725-64c46a958a99
+	fromColumn: 'Pilotage RUN/TMA'.'Task Assignee Id'
+	toColumn: Users.'User ID'
+
+relationship cba000a0-5550-252f-bc90-96e48d054aa9
+	fromColumn: 'Temps renseignés'.'Date de création'
+	toColumn: CalendarTable.Date
+
+relationship 114e2546-a753-fd7c-8b61-1e2e45261358
+	fromColumn: 'Taux Occup'.'Date d''échéance'
+	toColumn: CalendarTable.Date
+
+relationship 08c35c25-0655-45f8-078d-7d657aec548a
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Pilotage RUN/TMA'.'Task Created Date'
+	toColumn: CalendarTable.Date
+

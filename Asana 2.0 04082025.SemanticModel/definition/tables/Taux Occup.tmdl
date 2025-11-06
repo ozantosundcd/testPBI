@@ -1,0 +1,175 @@
+table 'Taux Occup'
+	lineageTag: 4c8dff9f-fe88-4dd1-90a4-a48275684aef
+
+	column Tâche_ID
+		dataType: string
+		lineageTag: 454b2569-6c0d-4d63-90ae-71cd93a8a541
+		summarizeBy: none
+		sourceColumn: Tâche_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assigné à'
+		dataType: string
+		lineageTag: b38efe74-cd9f-491f-bf6b-f20c728fdd6f
+		summarizeBy: none
+		sourceColumn: Assigné à
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date d''échéance'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ad143a8f-2972-4206-9ca8-d8e5c5ba4fa8
+		summarizeBy: none
+		sourceColumn: Date d'échéance
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Date de début'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: bc9c5de9-2b81-44fa-a5f2-378d4de4fea2
+		summarizeBy: none
+		sourceColumn: Date de début
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Assigné_ID
+		dataType: string
+		lineageTag: 0624f41e-b67b-4fd9-b4d3-9437c3b154ca
+		summarizeBy: none
+		sourceColumn: Assigné_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Complétée
+		dataType: string
+		lineageTag: 78c3c582-146e-4c28-9fc0-76e52c0bb6fd
+		summarizeBy: none
+		sourceColumn: Complétée
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Durée estimée (h)'
+		dataType: double
+		lineageTag: 62b360be-79b2-4dff-92bd-546bede15a42
+		summarizeBy: sum
+		sourceColumn: Durée estimée (h)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Nom de la tâche'
+		dataType: string
+		lineageTag: 350c131f-4b31-46b6-9257-9599194285ac
+		summarizeBy: none
+		sourceColumn: Nom de la tâche
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Taux Occup' = m
+		mode: import
+		source = ```
+				let
+				    BaseUrl = "https://app.asana.com", // URL de base de l'API Asana
+				    PAT = "Bearer 2/1209801102604181/1210686810106085:ada4fdc0d1efde96d2015482da6ef0ea
+				", // notre token de sécurité
+				    ProjectGID = "1208565512643129", // project ID [TMA] Planification
+				    WorkspaceGID = "250158174658607", // identifiant unique global (GID) de l'espace de travail Asana DECIDEOM
+				
+				    // Récupération des tâches du projet
+				    TasksResponse = Json.Document(Web.Contents(
+				        BaseUrl, 
+				        [
+				            RelativePath = "/api/1.0/projects/" & ProjectGID & "/tasks?opt_fields=gid,name,due_on,start_on,assignee,completed,custom_fields",
+				            Headers = [#"Authorization" = PAT]
+				        ]
+				    )),
+				
+				    Tasks = TasksResponse[data],
+				    TasksTable = Table.FromList(Tasks, Splitter.SplitByNothing(), {"Task"}), 
+				    ExpandedTasks = Table.ExpandRecordColumn(TasksTable, "Task", {"gid", "name", "due_on", "start_on", "assignee", "completed", "custom_fields"}), 
+				
+				    // Traitement des colonnes
+				    ProcessedTasks = Table.TransformColumns(ExpandedTasks, {
+				        {"assignee", each if _ is record then _[gid] else null, type text},
+				        {"completed", each if _ = true then "Oui" else "Non"} 
+				    }),
+				
+				    // Extraction du champ "Estimated time" en heures
+				    ExtractDurationField = Table.AddColumn(ProcessedTasks, "Durée estimée (h)", each 
+				        let
+				            fields = [custom_fields],
+				            filteredField = List.First(List.Select(fields, each Record.Field(_, "name") = "Estimated time"), null),
+				            durationMinutes = if filteredField <> null then Record.Field(filteredField, "number_value") else null
+				        in
+				            if durationMinutes <> null then Number.Round(durationMinutes / 60, 2) else null
+				    , type number),
+				
+				    RemovedCustomFields = Table.RemoveColumns(ExtractDurationField, {"custom_fields"}),
+				
+				    RenamedTasks = Table.RenameColumns(RemovedCustomFields, {
+				        {"gid", "Tâche_ID"},
+				        {"name", "Nom de la tâche"},
+				        {"due_on", "Date d'échéance"},
+				        {"start_on", "Date de début"},
+				        {"assignee", "Assigné_ID"},
+				        {"completed", "Complétée"}
+				    }),
+				
+				    // Récupération des utilisateurs de l'espace de travail
+				    UsersResponse = Json.Document(Web.Contents(
+				        BaseUrl, 
+				        [
+				            RelativePath = "/api/1.0/workspaces/" & WorkspaceGID & "/users",
+				            Headers = [#"Authorization" = PAT]
+				        ]
+				    )),
+				
+				    Users = UsersResponse[data], 
+				    UsersTable = Table.FromList(Users, Splitter.SplitByNothing(), {"User"}),
+				    ExpandedUsers = Table.ExpandRecordColumn(UsersTable, "User", {"gid", "name", "resource_type"}),
+				
+				    RenamedUsers = Table.RenameColumns(ExpandedUsers, {
+				        {"gid", "User_ID"},
+				        {"name", "User_Name"},
+				        {"resource_type", "User_Type"}
+				    }),
+				
+				    MergedTable = Table.NestedJoin(RenamedTasks, "Assigné_ID", RenamedUsers, "User_ID", "UserInfo", JoinKind.LeftOuter),
+				
+				    FinalTable = Table.ExpandTableColumn(MergedTable, "UserInfo", {"User_Name"}),
+				
+				    CleanedTable = Table.ReplaceValue(FinalTable, null, "Non Assigné", Replacer.ReplaceValue, {"User_Name"}), 
+				
+				    FinalRenamedTable = Table.RenameColumns(CleanedTable, {
+				        {"User_Name", "Assigné à"}
+				    }),
+				
+				    ChangedTypes = Table.TransformColumnTypes(FinalRenamedTable, {
+				        {"Tâche_ID", type text},
+				        {"Nom de la tâche", type text},
+				        {"Date d'échéance", type date},
+				        {"Date de début", type date},
+				        {"Assigné à", type text},
+				        {"Complétée", type text},
+				        {"Durée estimée (h)", type number}
+				    }),
+				
+				    #"Reordered Columns" = Table.ReorderColumns(ChangedTypes,{"Tâche_ID", "Assigné à", "Nom de la tâche", "Date d'échéance", "Date de début", "Assigné_ID", "Complétée", "Durée estimée (h)"}),
+				    #"Colonnes permutées" = Table.ReorderColumns(#"Reordered Columns",{"Tâche_ID", "Assigné à", "Nom de la tâche", "Date de début", "Date d'échéance", "Assigné_ID", "Complétée", "Durée estimée (h)"})
+				
+				in
+				    #"Colonnes permutées"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

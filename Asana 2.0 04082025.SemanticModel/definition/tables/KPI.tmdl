@@ -1,0 +1,447 @@
+table KPI
+	lineageTag: e2aa0267-1e4c-4e76-b933-194c0af6f1eb
+
+	measure 'Nb tâches incomplètes' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT('Pilotage RUN/TMA'[Task Id]),
+			    'Pilotage RUN/TMA'[Task Completed] = "FALSE"
+			)
+		formatString: 0
+		lineageTag: c324d45f-dbaf-4afd-ad4e-c40954412b82
+
+	measure 'Nb tâches dépassées' = ```
+			
+			COUNTROWS(
+			    DISTINCT(
+			        SELECTCOLUMNS(
+			            FILTER(
+			                'Pilotage RUN/TMA',
+			                'Pilotage RUN/TMA'[Task Due At] < TODAY() &&
+			                ISBLANK('Pilotage RUN/TMA'[Task Completed At]) &&
+			                NOT(ISBLANK('Pilotage RUN/TMA'[Task Due At]))
+			            ),
+			            "TaskID", 'Pilotage RUN/TMA'[Task ID]
+			        )
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: e2e5b4d0-e281-4b9b-a280-1db4abb78c6a
+
+	measure 'Nb tâches' = DISTINCTCOUNT('Pilotage RUN/TMA'[Task Id])
+		formatString: 0
+		lineageTag: 239a15cc-92b5-4366-b077-5b701b7b6357
+
+	measure 'Nb tâches cumulées' = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT('Pilotage RUN/TMA'[Task ID]), 
+			    FILTER(
+			        ALL('CalendarTable'[Date]),
+			        'CalendarTable'[Date] <= MAX('CalendarTable'[Date])
+			    )
+			)
+			```
+		formatString: 0
+		lineageTag: c313c50f-3db6-4f4d-afb5-930bcde66847
+
+	measure 'Nb tâches complétées' = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT('Pilotage RUN/TMA'[Task Id]),
+			    'Pilotage RUN/TMA'[Task Completed] = "TRUE"
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 48f5b251-7d9d-4e44-a1d5-c69234ca4877
+
+	measure 'Durées heures formatées' = ```
+			
+			VAR TotalMinutes = SUM('Temps renseignés'[Duration_Minutes])
+			VAR Hours = INT(TotalMinutes / 60)
+			VAR Minutes = MOD(TotalMinutes, 60)
+			RETURN
+			    IF(
+			        Minutes = 0,
+			        FORMAT(Hours, "00") & "h",
+			        FORMAT(Hours, "00") & "h " & FORMAT(Minutes, "00") & "min"
+			    )
+			
+			```
+		lineageTag: 03c96495-e421-4853-9e84-293251688d5b
+
+	measure 'Durées jours formatées' =
+			
+			VAR TotalDays = SUM('Temps renseignés'[Duration_Days]) -- Remplace 'TableName' par le nom de ta table
+			VAR IntegerPart = INT(TotalDays) -- Partie entière
+			VAR DecimalPart = MOD(TotalDays, 1) -- Partie décimale
+			RETURN
+			    IF(
+			        DecimalPart = 0,
+			        FORMAT(IntegerPart, "0") & " J", -- Pas de décimales
+			        FORMAT(TotalDays, "0.00") & " J" -- Avec deux décimales
+			    )
+		lineageTag: 82cf681b-dd06-409e-b713-198163a29366
+
+	measure 'Titre Facturations' = "Dashboard Facturations"
+		lineageTag: 831ed9c2-0e68-432b-8dfa-92aa2cecbf62
+
+	measure 'Titre Clients' = "Feuille Détails Clients"
+		lineageTag: d5f32999-f534-4fef-a725-ec5373e96c24
+
+	measure 'Titre Tâches' = "Feuille Détails Tâches"
+		lineageTag: 62947950-6af0-4abd-bbf1-93bc8770a49d
+
+	measure 'Titre Collabs' = "Feuille Détails Collabs"
+		lineageTag: 8d984dca-2f07-4596-8c50-24b302cb8d6f
+
+	measure 'Client / Temps' = VALUES('Temps renseignés'[Client]) + VALUES('Temps renseignés'[Duration_Days])
+		lineageTag: 3d4311e8-1814-4349-a576-f3962eda42b5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Durée Estimée' = SUM('Taux Occup'[Durée estimée (h)])
+		displayFolder: Taux d'occup
+		lineageTag: c69f15bd-76c9-47eb-a676-7eee8492f501
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Temps Saisi (Duration_Hours) (pour taux d''occup)' = ```
+			
+			VAR StartDate = SELECTEDVALUE('Taux Occup'[Date de début])
+			VAR EndDate = SELECTEDVALUE('Taux Occup'[Date d'échéance])
+			
+			// Vérification si StartDate est vide, alors on le remplace par EndDate
+			VAR AdjustedStartDate = IF(ISBLANK(StartDate), EndDate, StartDate)
+			
+			RETURN 
+			CALCULATE(
+			    SUM('Temps renseignés'[Duration_Hours]),
+			    'Temps renseignés'[Date de création] >= AdjustedStartDate
+			)
+			
+			
+			
+			
+			```
+		formatString: 0
+		displayFolder: Taux d'occup
+		lineageTag: 792826ce-245e-4339-ba44-b6638b3d5f3c
+
+	measure 'Taux d''occupation' = ```
+			
+			DIVIDE(
+			    [Total Heures Travaillées],
+			    SUM('Taux Occup'[Durée estimée (h)]),
+			    0
+			)
+			
+			```
+		displayFolder: Taux d'occup
+		lineageTag: 6115556a-21ce-4fe1-991b-452656186b84
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Temps SaisiV2.0  (Duration_Hours) (pour taux d''occup)' = ```
+			
+			VAR StartDate = SELECTEDVALUE('Temps renseignés'[Date de création])
+			VAR EndDate = SELECTEDVALUE('Taux Occup'[Date d'échéance])
+			
+			// Vérification si StartDate est vide, alors on le remplace par EndDate
+			VAR AdjustedStartDate = IF(ISBLANK(StartDate), EndDate, StartDate)
+			
+			RETURN 
+			CALCULATE(
+			    SUM('Temps renseignés'[Duration_Hours]),
+			    'Temps renseignés'[Date de création] >= AdjustedStartDate,
+			    'Temps renseignés'[Date de création] <= EndDate
+			)
+			
+			
+			
+			
+			```
+		displayFolder: Taux d'occup
+		lineageTag: c869f232-085f-46b7-8774-63f1474454c8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Heures Travaillées' =
+			
+			SUM('Temps renseignés'[Duration_Hours])
+		lineageTag: 335e4647-5565-4cdb-9009-811fa95b2eec
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Heures Moyennes Consultant' =
+			
+			DIVIDE(
+			    [Total Heures Travaillées],
+			    DISTINCTCOUNT('Temps renseignés'[Collaborateur]),
+			    0
+			)
+		lineageTag: 79a44624-6eee-457b-ad28-232d111180c3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Écart Heures' = ```
+			
+			SUM('Taux Occup'[Durée estimée (h)]) - [Total Heures Travaillées]
+			
+			```
+		lineageTag: f90bf886-55c2-4734-93cf-51bf65d998a2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Taux Respect Estimations' = ```
+			
+			DIVIDE(
+			    SUM('Temps renseignés'[Duration_Hours]),
+			    SUM('Taux Occup'[Durée estimée (h)]),
+			    0
+			)
+			
+			```
+		lineageTag: cc0dc32e-9872-4f6e-8e9a-de72cd8ae896
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Taux Complétion' =
+			
+			DIVIDE(
+			    [Nb Tâches Complétées],
+			    [Nb tâches],
+			    0
+			)
+		lineageTag: e6a03a95-a9d5-44a5-9dd8-f1065b956f31
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Heures Réalisées (par collab)' =
+			
+			CALCULATE(
+			    SUM('Temps renseignés'[Duration_Hours]),
+			    ALLEXCEPT('Users', 'Users'[User Name])
+			)
+		lineageTag: eb84dbbb-2dd0-414c-b11b-907e88133a19
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Heures Estimées (par collab)' =
+			
+			CALCULATE(
+			    SUM('Taux Occup'[Durée estimée (h)]),
+			    ALLEXCEPT('Users', 'Users'[User Name])
+			)
+		lineageTag: 05c988c2-624e-4dcc-9046-a9431d21fffb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Écart Réalisé - Estimé (H)' =
+			
+			[Heures Réalisées (par collab)] - [Heures Estimées (par collab)]
+		lineageTag: b7c74093-b6a5-4d9b-9fcc-82110a90d958
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'TopN Écart Collaborateurs' = ```
+			
+			VAR SelectedTop = SELECTEDVALUE('TopN Table'[TopN], 3) -- valeur par défaut = 3
+			RETURN
+			    IF (
+			        RANKX (
+			            ALLSELECTED('Users'[User Name]),
+			            [Écart Réalisé - Estimé (H)],
+			            ,
+			            DESC
+			        ) <= SelectedTop,
+			        1,
+			        0
+			    )
+			
+			```
+		formatString: 0
+		lineageTag: e5442d96-7266-4518-8ffb-ce3becf69bd2
+
+	measure 'TopN Sous-Perf Collaborateurs' =
+			
+			VAR SelectedTop = SELECTEDVALUE('TopN Table'[TopN], 3) -- Par défaut Top 3
+			RETURN
+			    IF (
+			        RANKX (
+			            ALLSELECTED('Users'[User Name]),
+			            [Écart Réalisé - Estimé (H)],
+			            ,
+			            ASC, -- CROISSANT pour attraper les plus bas écarts
+			            Dense
+			        ) <= SelectedTop,
+			        1,
+			        0
+			    )
+		formatString: 0
+		lineageTag: bab8e065-b5ca-419e-96fe-d88f60bbf226
+
+	measure 'Complément Estimé' =
+			
+			VAR diff = [Total heures estimées] - [Heures Réalisées (par collab)]
+			RETURN IF(diff < 0, 0, diff)
+		lineageTag: fb2957f3-d14a-4689-94a8-0a2846ba9210
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total heures estimées' = sum('Taux Occup'[Durée estimée (h)])
+		lineageTag: 27b307c4-3d2b-42d3-8b17-4303e370c78d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Estimé x réalisé' = DIVIDE([Heures Réalisées (par collab)],[Heures Estimées (par collab)])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: ff5c9861-7dd2-424a-9106-7ce194ecb656
+
+	measure Carte_Client_Detail =
+			
+			VAR ClientNom = SELECTEDVALUE('Temps renseignés'[Client])
+			
+			VAR TotalJours =
+			    CALCULATE(
+			        SUM('Temps renseignés'[Duration_Days]),
+			        ALLEXCEPT('Temps renseignés', 'Temps renseignés'[Client]),
+			        KEEPFILTERS('CalendarTable'[Date])
+			    )
+			
+			VAR ListeDECI =
+			    CONCATENATEX(
+			        VALUES('Pilotage RUN/TMA'[DECI]),
+			        'Pilotage RUN/TMA'[DECI],
+			        UNICHAR(10)
+			    )
+			
+			RETURN
+			IF(
+			    NOT ISBLANK(TotalJours) && TotalJours > 0,
+			    ClientNom & " " & FORMAT(TotalJours, "0.000") & " j", //& UNICHAR(10) & ListeDECI,
+			    BLANK()
+			)
+		lineageTag: 9b73d498-8985-4861-9631-9c4cffe62efa
+
+	measure 'total heures' = sum('Temps renseignés'[Duration_Days])
+		formatString: 0.000
+		lineageTag: 35cff1fe-16bd-4bfa-a533-49c837885449
+
+	measure MoisCalPage = ```
+			
+			VAR DateMax =
+			    CALCULATE(
+			        MAX('CalendarTable'[Date]),
+			        KEEPFILTERS('Temps renseignés')
+			    )
+			RETURN
+			    FORMAT(DateMax, "[$-fr-FR]mmmm yyyy")
+			
+			```
+		lineageTag: f6c5cf0f-514b-42f3-9176-e75a8ca0ad29
+
+	measure Liste_DECI_Mensuelle =
+			
+			VAR MoisSelectionne = SELECTEDVALUE('CalendarTable'[Year Month])
+			VAR ClientNom = SELECTEDVALUE('Temps renseignés'[Client])
+			
+			RETURN
+			CONCATENATEX(
+			    FILTER(
+			        'Pilotage RUN/TMA',
+			        RELATED('Bridge Tasks'[Task Id]) IN
+			            SELECTCOLUMNS(
+			                FILTER(
+			                    'Temps renseignés',
+			                    'Temps renseignés'[Client] = ClientNom &&
+			                    RELATED('CalendarTable'[Year Month]) = MoisSelectionne
+			                ),
+			                "Task", 'Temps renseignés'[Task_GID]
+			            )
+			    ),
+			    'Pilotage RUN/TMA'[DECI],
+			    UNICHAR(10)
+			)
+		lineageTag: 44b0fa0b-8468-4f40-860d-af61d1872992
+
+	measure 'Heures Totales Outils' =
+			
+			CALCULATE(
+			    SUM('Temps renseignés'[Duration_Hours]),
+			    REMOVEFILTERS('Pilotage RUN/TMA'[Outil(s)])
+			)
+		lineageTag: c621bdbc-eead-4550-80ae-537663945c57
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Taux Utilisation Outil' = ```
+			
+			DIVIDE(
+			    DISTINCTCOUNT('Pilotage RUN/TMA'[DECI]), 
+			    CALCULATE(DISTINCTCOUNT('Pilotage RUN/TMA'[DECI]), ALL('Pilotage RUN/TMA'))
+			)
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 64ddfcbc-660c-4e1e-98d7-d6ed30c9eae9
+
+	measure 'Complément Taux Utilisation' =
+			
+			VAR taux = [Taux Utilisation Outil]
+			RETURN IF(taux > 1, 0, 1 - taux)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 567d5ddd-d24a-4594-a0bc-728d50d85790
+
+	measure '% Nb Tâches' = ```
+			
+			VAR NbTaches = DISTINCTCOUNT('Pilotage RUN/TMA'[Task Id])
+			VAR TotalTachesParOutil = 
+			    CALCULATE(
+			        DISTINCTCOUNT('Pilotage RUN/TMA'[Task Id]),
+			        REMOVEFILTERS('Pilotage RUN/TMA'[Type intervention TMA])
+			    )
+			RETURN
+			DIVIDE(NbTaches, TotalTachesParOutil)
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: a8e3ccdf-c1fa-47cb-88bf-a420ed8e4e14
+
+	measure '% Tâches par collab (outil sélectionné)' =
+			
+			DIVIDE(
+			    [Nb tâches],
+			    CALCULATE(
+			        [Nb tâches],
+			        ALLEXCEPT('Pilotage RUN/TMA', 'Pilotage RUN/TMA'[Outil(s)])
+			    )
+			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 4aea02b8-a1b9-479e-92cd-2353b1d19794
+
+	column 'Heures Outil' =
+			
+			SUM('Temps renseignés'[Duration_Hours])
+		lineageTag: 4bd1342e-23d0-4b1d-8745-05cd57f3c97a
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition KPI = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

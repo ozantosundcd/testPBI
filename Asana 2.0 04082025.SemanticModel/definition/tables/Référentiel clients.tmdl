@@ -1,0 +1,432 @@
+table 'Référentiel clients'
+	lineageTag: 4be6d36e-7e6d-4e4c-b1f9-99bba7aaae76
+
+	column 'PK Référentiel Client'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1fbe5dd1-20de-459e-88d3-5161865e90f9
+		summarizeBy: sum
+		sourceColumn: PK Référentiel Client
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Assignee Name'
+		dataType: string
+		lineageTag: 34121c9d-40de-4006-bfb5-fd9ab1e93e75
+		summarizeBy: none
+		sourceColumn: Task Assignee Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Assignee Id'
+		dataType: string
+		lineageTag: 68d89f3d-9ebd-420c-bb37-46974a635a2e
+		summarizeBy: none
+		sourceColumn: Task Assignee Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Assignee Email'
+		dataType: string
+		lineageTag: 9bd8a7ba-e165-433a-bdcf-8462699fe7ba
+		summarizeBy: none
+		sourceColumn: Task Assignee Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Completed'
+		dataType: string
+		lineageTag: 8c84c679-5282-489e-bd67-595a6908913a
+		summarizeBy: none
+		sourceColumn: Task Completed
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Completed At'
+		dataType: string
+		lineageTag: 0407d118-ca34-49b5-9264-873c062ada17
+		summarizeBy: none
+		sourceColumn: Task Completed At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Created At'
+		dataType: string
+		lineageTag: 71288743-f2ca-4a2d-9fe4-4cf4637be41b
+		summarizeBy: none
+		sourceColumn: Task Created At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Due At'
+		dataType: string
+		lineageTag: cc1a07c5-0cb6-4f30-81cc-0e3244116d01
+		summarizeBy: none
+		sourceColumn: Task Due At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Start On'
+		dataType: string
+		lineageTag: ffa38486-5812-4150-9d7f-6f596220040c
+		summarizeBy: none
+		sourceColumn: Task Start On
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Type'
+		dataType: string
+		lineageTag: 380745d4-ce33-4cd8-adfa-881153cbfc19
+		summarizeBy: none
+		sourceColumn: Task Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Id'
+		dataType: string
+		lineageTag: 9e01fd47-9a78-49b3-833a-80f53cdbeb5b
+		summarizeBy: none
+		sourceColumn: Task Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Section Id'
+		dataType: string
+		lineageTag: c27a4791-f0b6-4939-80a0-d5019ecb9957
+		summarizeBy: none
+		sourceColumn: Task Section Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Section Name'
+		dataType: string
+		lineageTag: 685e4770-547e-4dd5-b44e-0c4cf40d5159
+		summarizeBy: none
+		sourceColumn: Task Section Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Modified At'
+		dataType: string
+		lineageTag: bb4bba76-7105-4692-9442-1a7ccbbc1efd
+		summarizeBy: none
+		sourceColumn: Task Modified At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Name'
+		dataType: string
+		lineageTag: f0f55fe6-dd93-4908-9182-fcdca4c8c08e
+		summarizeBy: none
+		sourceColumn: Task Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Number Of Likes'
+		dataType: string
+		lineageTag: bc1fe4be-466b-4046-abbb-91208a5a78a7
+		summarizeBy: none
+		sourceColumn: Task Number Of Likes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Actual Time Minutes'
+		dataType: string
+		lineageTag: 8d95b70e-0d1f-4868-a1ba-28fad1ea3a93
+		summarizeBy: none
+		sourceColumn: Task Actual Time Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Current Status Color'
+		dataType: string
+		lineageTag: 85c09579-81fc-4cbb-84c2-1dbb3508b2f9
+		summarizeBy: none
+		sourceColumn: Project Current Status Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Current Status Text'
+		dataType: string
+		lineageTag: 4b69e835-f82b-44c4-8fe1-00b5ea9fe2ac
+		summarizeBy: none
+		sourceColumn: Project Current Status Text
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Current Status Posted On'
+		dataType: string
+		lineageTag: d758021f-7cc3-409b-a675-5a63e438b9a3
+		summarizeBy: none
+		sourceColumn: Project Current Status Posted On
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Current Status Posted By'
+		dataType: string
+		lineageTag: d16a0c3f-845d-4d05-832e-a83482aa6a15
+		summarizeBy: none
+		sourceColumn: Project Current Status Posted By
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Data Archived'
+		dataType: string
+		lineageTag: 007de5de-7982-4bd5-b6d7-6889c56c94eb
+		summarizeBy: none
+		sourceColumn: Project Data Archived
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Id'
+		dataType: string
+		lineageTag: fdaf4a9c-8c29-4d28-a002-4d2d9a4d19a4
+		summarizeBy: none
+		sourceColumn: Project Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Color'
+		dataType: string
+		lineageTag: d985b918-f0b5-4cf3-b1b8-0a4a6ef13f98
+		summarizeBy: none
+		sourceColumn: Project Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Created At'
+		dataType: string
+		lineageTag: 7e69fe94-2777-4e9b-8e74-5433b703a4ab
+		summarizeBy: none
+		sourceColumn: Project Created At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Modified At'
+		dataType: string
+		lineageTag: 7f20b501-8845-4764-8e49-08b7302a1385
+		summarizeBy: none
+		sourceColumn: Project Modified At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Name'
+		dataType: string
+		lineageTag: 46831ec3-b6d2-4f9f-89ed-15f2719a8398
+		summarizeBy: none
+		sourceColumn: Project Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Notes'
+		dataType: string
+		lineageTag: 5398b948-bee1-4689-9ccb-e33b840a0c21
+		summarizeBy: none
+		sourceColumn: Project Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Owner Name'
+		dataType: string
+		lineageTag: f73f35b8-30e4-4511-976c-9019e3bacf40
+		summarizeBy: none
+		sourceColumn: Project Owner Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Public'
+		dataType: string
+		lineageTag: 90991096-5c0c-4fa4-922c-2eecc5bc0c8b
+		summarizeBy: none
+		sourceColumn: Project Public
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Due On'
+		dataType: string
+		lineageTag: 2b091566-9b0b-442e-b327-8922468047e8
+		summarizeBy: none
+		sourceColumn: Project Due On
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Start On'
+		dataType: string
+		lineageTag: fe498a8b-cb4f-46e9-b666-ca027a25b8d4
+		summarizeBy: none
+		sourceColumn: Project Start On
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Custom Fields'
+		dataType: string
+		lineageTag: c133a10d-6774-44e0-9d4c-21a6ac2ea88a
+		summarizeBy: none
+		sourceColumn: Project Custom Fields
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workspace Name'
+		dataType: string
+		lineageTag: 12d7c0bb-27e9-4141-b0b8-9cda1abc3800
+		summarizeBy: none
+		sourceColumn: Workspace Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Team Name'
+		dataType: string
+		lineageTag: caf50f47-8d08-4de3-9e83-184079880dda
+		summarizeBy: none
+		sourceColumn: Team Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Outil(s) BDD'
+		dataType: string
+		lineageTag: 4499a2c2-e241-4dd5-aafa-c1efe2a5b680
+		summarizeBy: none
+		sourceColumn: Outil(s) BDD
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Outil(s) flux'
+		dataType: string
+		lineageTag: 39bae846-f16f-49f4-a823-6ca9297ff29b
+		summarizeBy: none
+		sourceColumn: Outil(s) flux
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Outil(s) viz'
+		dataType: string
+		lineageTag: 3a9ced80-3274-4b97-900e-8167f446d5db
+		summarizeBy: none
+		sourceColumn: Outil(s) viz
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'UX / Thème'
+		dataType: string
+		lineageTag: f21faf14-0ea3-4a59-b584-ba8f1b6a7d08
+		summarizeBy: none
+		sourceColumn: UX / Thème
+
+		annotation SummarizationSetBy = Automatic
+
+	column COPIL
+		dataType: string
+		lineageTag: bdb955a4-88d1-45c6-8b2e-8d3ba80d6835
+		summarizeBy: none
+		sourceColumn: COPIL
+
+		annotation SummarizationSetBy = Automatic
+
+	column Commercial-gId
+		dataType: string
+		lineageTag: a859b6a0-3a84-4a96-a0b1-ec3d9cebebce
+		summarizeBy: none
+		sourceColumn: Commercial-gId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Commercial-name
+		dataType: string
+		lineageTag: 6cad0697-bf60-40d9-bd20-f610695b93a3
+		summarizeBy: none
+		sourceColumn: Commercial-name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Agence
+		dataType: string
+		lineageTag: 2955d068-d7f7-4bae-a8c9-a5d8340dc869
+		summarizeBy: none
+		sourceColumn: Agence
+
+		annotation SummarizationSetBy = Automatic
+
+	column Priority
+		dataType: string
+		lineageTag: 1c79435b-c637-42b2-b6e3-adfcc769fd41
+		summarizeBy: none
+		sourceColumn: Priority
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actif année'
+		dataType: string
+		lineageTag: 186e9851-b85c-4402-9f09-554c025c4d53
+		summarizeBy: none
+		sourceColumn: Actif année
+
+		annotation SummarizationSetBy = Automatic
+
+	column Criticité
+		dataType: string
+		lineageTag: e2f9b960-ccf0-4bd0-b810-61f5eca95e9e
+		summarizeBy: none
+		sourceColumn: Criticité
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Factu TMA - Référentiel clients'
+		dataType: string
+		lineageTag: 2ee71758-bfc5-413d-b12a-3a9c7c8d5f6d
+		summarizeBy: none
+		sourceColumn: Factu TMA - Référentiel clients
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Enveloppe TMA Annuelle'
+		dataType: string
+		lineageTag: 5a9024d4-a613-4cf2-ba8c-03aeaedd6320
+		summarizeBy: none
+		sourceColumn: Enveloppe TMA Annuelle
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Enveloppe TMA Unitaire'
+		dataType: string
+		lineageTag: 2464ffff-aecd-4c62-b822-b29b44f2980c
+		summarizeBy: none
+		sourceColumn: Enveloppe TMA Unitaire
+
+		annotation SummarizationSetBy = Automatic
+
+	column Client
+		dataType: string
+		lineageTag: 35fe20b6-3324-486a-a62a-4047bbdba6dc
+		summarizeBy: none
+		sourceColumn: Client
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Type intervention'
+		dataType: string
+		lineageTag: 8258d4dc-8e09-4b1e-a902-410dc1988ac3
+		summarizeBy: none
+		sourceColumn: Type intervention
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Référentiel clients' = m
+		mode: import
+		source =
+				let
+				    Source = Asana.Tables("https://app.asana.com/0/1208535254051950/1209106705411691"),
+				    Tasks1 = Source{[Name="Tasks"]}[Data],
+				    #"Custom Fields développé" = Table.ExpandListColumn(Tasks1, "Custom Fields"),
+				    #"Custom Fields développé1" = Table.ExpandRecordColumn(#"Custom Fields développé", "Custom Fields", {"name", "value"}, {"Custom Fields.name", "Custom Fields.value"}),
+				    #"Colonnes supprimées" = Table.RemoveColumns(#"Custom Fields développé1",{"Tags"}),
+				    #"Colonne dynamique" = Table.Pivot(#"Colonnes supprimées", List.Distinct(#"Colonnes supprimées"[#"Custom Fields.name"]), "Custom Fields.name", "Custom Fields.value"),
+				    #"Index ajouté" = Table.AddIndexColumn(#"Colonne dynamique", "Index", 1, 1, Int64.Type),
+				    #"Colonnes permutées" = Table.ReorderColumns(#"Index ajouté",{"Index", "Task Assignee Name", "Task Assignee Id", "Task Assignee Email", "Task Completed", "Task Completed At", "Task Created At", "Task Due At", "Task Start On", "Task Type", "Task Id", "Task Section Id", "Task Section Name", "Task Modified At", "Task Name", "Task Number Of Likes", "Task Actual Time Minutes", "Project Current Status Color", "Project Current Status Text", "Project Current Status Posted On", "Project Current Status Posted By", "Project Data Archived", "Project Id", "Project Color", "Project Created At", "Project Modified At", "Project Name", "Project Notes", "Project Owner Name", "Project Public", "Project Due On", "Project Start On", "Project Custom Fields", "Workspace Name", "Team Name", "Outil(s) BDD", "Outil(s) flux", "Outil(s) viz", "UX / Thème", "COPIL", "Client", "Commercial-gId", "Commercial-name", "Agence", "Priority", "Actif année", "Criticité", "Factu TMA - Référentiel clients", "Enveloppe TMA Annuelle", "Enveloppe TMA Unitaire"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Colonnes permutées",{{"Index", "PK Référentiel Client"}})
+				in
+				    #"Colonnes renommées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

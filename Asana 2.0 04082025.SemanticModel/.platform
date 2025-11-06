@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Asana 2.0 04082025"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "1cb00523-f962-4f5a-abca-841c68c85b94"
+  }
+}

@@ -1,0 +1,29 @@
+table 'TopN Table'
+	isHidden
+	lineageTag: a2997e9c-1cf2-4472-b8f4-9bd089d42d99
+
+	column TopN
+		isHidden
+		formatString: 0
+		lineageTag: 8f43180f-dcc9-47e2-b4e3-ed772b67a643
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [TopN]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'TopN Table' = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "TopN", INTEGER,
+				    {
+				        {3},
+				        {5},
+				        {10}
+				    }
+				)
+
+	annotation PBI_Id = 89c776051a1f4ea9bd67e8193f8e7803
+

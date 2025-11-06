@@ -1,0 +1,341 @@
+table 'Interventions ponctuelles'
+	lineageTag: ad118e18-a003-4155-89b0-6ded6d83f947
+
+	column 'Task Assignee Name'
+		dataType: string
+		lineageTag: bd255883-61df-4454-81ff-0980ced74bf1
+		summarizeBy: none
+		sourceColumn: Task Assignee Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Assignee Id'
+		dataType: string
+		lineageTag: 522a1435-1ea2-453e-9e54-16676657fe9f
+		summarizeBy: none
+		sourceColumn: Task Assignee Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Assignee Email'
+		dataType: string
+		lineageTag: 43b02954-9ad9-4bf2-8824-1a1f7f2a234a
+		summarizeBy: none
+		sourceColumn: Task Assignee Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Completed'
+		dataType: string
+		lineageTag: f8e0c030-0f74-43f2-a6b7-dfce244ce7be
+		summarizeBy: none
+		sourceColumn: Task Completed
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Completed At'
+		dataType: string
+		lineageTag: 5662424d-4515-416e-8927-4f5e8003ce40
+		summarizeBy: none
+		sourceColumn: Task Completed At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Created At'
+		dataType: string
+		lineageTag: 49df7a10-45b2-4c5f-bd5b-5b773d3b84b4
+		summarizeBy: none
+		sourceColumn: Task Created At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Due At'
+		dataType: string
+		lineageTag: 4c4ee960-cd67-434b-9473-141ef3715987
+		summarizeBy: none
+		sourceColumn: Task Due At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Start On'
+		dataType: string
+		lineageTag: e02ea90c-9b1f-4132-9575-acbf88623475
+		summarizeBy: none
+		sourceColumn: Task Start On
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Type'
+		dataType: string
+		lineageTag: b2c9bb21-7e69-4545-93a0-7e4b65922921
+		summarizeBy: none
+		sourceColumn: Task Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Id'
+		dataType: string
+		lineageTag: 70ea163a-2283-480d-b6c1-cd068fc3129d
+		summarizeBy: none
+		sourceColumn: Task Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Section Id'
+		dataType: string
+		lineageTag: 97aa619f-1195-4780-ab79-30693a8dd8cd
+		summarizeBy: none
+		sourceColumn: Task Section Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Section Name'
+		dataType: string
+		lineageTag: dd0da80f-4a80-4446-b9ae-69c1626f23c7
+		summarizeBy: none
+		sourceColumn: Task Section Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Modified At'
+		dataType: string
+		lineageTag: adfe1fab-6ca3-4941-ad90-e565730cab95
+		summarizeBy: none
+		sourceColumn: Task Modified At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Name'
+		dataType: string
+		lineageTag: 3562eabd-e178-43b4-aedb-84dd4427f011
+		summarizeBy: none
+		sourceColumn: Task Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Number Of Likes'
+		dataType: string
+		lineageTag: 83a4ffe8-952e-4c71-b597-c2ffa2d7ed0b
+		summarizeBy: none
+		sourceColumn: Task Number Of Likes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Actual Time Minutes'
+		dataType: string
+		lineageTag: 4e60c330-3a4b-4f52-b2b0-5ac392dec13d
+		summarizeBy: none
+		sourceColumn: Task Actual Time Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Current Status Color'
+		dataType: string
+		lineageTag: d27627a3-2466-4192-b62b-d794173eab0c
+		summarizeBy: none
+		sourceColumn: Project Current Status Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Current Status Text'
+		dataType: string
+		lineageTag: 878dd853-3c9f-40b8-8adb-cb36ced8cc39
+		summarizeBy: none
+		sourceColumn: Project Current Status Text
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Current Status Posted On'
+		dataType: string
+		lineageTag: 01a82c73-7599-4178-ab87-553a12a39856
+		summarizeBy: none
+		sourceColumn: Project Current Status Posted On
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Current Status Posted By'
+		dataType: string
+		lineageTag: d38496da-a942-4376-9fa9-01d9ed5b53d7
+		summarizeBy: none
+		sourceColumn: Project Current Status Posted By
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Data Archived'
+		dataType: string
+		lineageTag: 19c0bc6d-d5fb-4619-9998-e498a15aad06
+		summarizeBy: none
+		sourceColumn: Project Data Archived
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Id'
+		dataType: string
+		lineageTag: 973d3a40-ea3a-4478-a00d-05605ce1d738
+		summarizeBy: none
+		sourceColumn: Project Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Color'
+		dataType: string
+		lineageTag: 31257048-4021-45c8-ae2d-8c50959b6ac9
+		summarizeBy: none
+		sourceColumn: Project Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Created At'
+		dataType: string
+		lineageTag: 3b4b3626-1d64-4ed9-bd29-a883cc348009
+		summarizeBy: none
+		sourceColumn: Project Created At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Modified At'
+		dataType: string
+		lineageTag: 8ec29102-0efa-416c-9930-13e46c689d73
+		summarizeBy: none
+		sourceColumn: Project Modified At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Name'
+		dataType: string
+		lineageTag: 9c884422-3e67-4100-8434-20084f5eb442
+		summarizeBy: none
+		sourceColumn: Project Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Notes'
+		dataType: string
+		lineageTag: eb36b2d4-bc19-4a19-a641-06d5a2f94d10
+		summarizeBy: none
+		sourceColumn: Project Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Owner Name'
+		dataType: string
+		lineageTag: 235c098b-00dc-4872-bd33-a498c1323c13
+		summarizeBy: none
+		sourceColumn: Project Owner Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Public'
+		dataType: string
+		lineageTag: 03627bfc-8ca5-4542-850f-cafe6094fe02
+		summarizeBy: none
+		sourceColumn: Project Public
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Due On'
+		dataType: string
+		lineageTag: 150c4968-b7d9-4462-91b6-e805586312fb
+		summarizeBy: none
+		sourceColumn: Project Due On
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Start On'
+		dataType: string
+		lineageTag: 11ddb408-1271-40cb-9177-a936b7da3706
+		summarizeBy: none
+		sourceColumn: Project Start On
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workspace Name'
+		dataType: string
+		lineageTag: a025da0e-0361-4bd3-bfc7-b31bc2fe50b4
+		summarizeBy: none
+		sourceColumn: Workspace Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Team Name'
+		dataType: string
+		lineageTag: 1fbcbdf5-aa38-4dbc-be66-d0d0d9589a92
+		summarizeBy: none
+		sourceColumn: Team Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estimated time'
+		dataType: string
+		lineageTag: 1827d0e9-d191-4ac8-8586-4d5d383613a1
+		summarizeBy: none
+		sourceColumn: Estimated time
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Type intervention'
+		dataType: string
+		lineageTag: ffee7523-237a-494b-8711-88b28240dfa7
+		summarizeBy: none
+		sourceColumn: Type intervention
+
+		annotation SummarizationSetBy = Automatic
+
+	column Commercial-gId
+		dataType: string
+		lineageTag: dda2863c-eb6b-481a-8c69-674e0b297ab2
+		summarizeBy: none
+		sourceColumn: Commercial-gId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Commercial-name
+		dataType: string
+		lineageTag: 94e2ab79-ca19-400e-adb4-0977831d156e
+		summarizeBy: none
+		sourceColumn: Commercial-name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nb jours estimé'
+		dataType: string
+		lineageTag: ef52c560-0d09-43c9-a6c3-c7559c1ea497
+		summarizeBy: none
+		sourceColumn: Nb jours estimé
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nb jours intermediaire estimé'
+		dataType: string
+		lineageTag: 987090b2-571e-4786-aeff-95ebe1c7c1ed
+		summarizeBy: none
+		sourceColumn: Nb jours intermediaire estimé
+
+		annotation SummarizationSetBy = Automatic
+
+	column Client
+		dataType: string
+		lineageTag: 437b06cc-1f80-4239-b0c9-663fa09bace5
+		summarizeBy: none
+		sourceColumn: Client
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Interventions ponctuelles' = m
+		mode: import
+		source =
+				let
+				    Source = Asana.Tables("https://app.asana.com/1/250158174658607/project/1208456446495269/list/1209496200057600"),
+				    Tasks = Source{[Name="Tasks"]}[Data],
+				    #"Custom Fields développé" = Table.ExpandListColumn(Tasks, "Custom Fields"),
+				    #"Custom Fields développé1" = Table.ExpandRecordColumn(#"Custom Fields développé", "Custom Fields", {"name", "value"}, {"Custom Fields.name", "Custom Fields.value"}),
+				    #"Colonnes supprimées" = Table.RemoveColumns(#"Custom Fields développé1",{"Tags", "Project Custom Fields"}),
+				    #"Colonne dynamique" = Table.Pivot(#"Colonnes supprimées", List.Distinct(#"Colonnes supprimées"[#"Custom Fields.name"]), "Custom Fields.name", "Custom Fields.value"),
+				    #"Lignes filtrées" = Table.SelectRows(#"Colonne dynamique", each ([Type intervention] = "TMA "))
+				in
+				    #"Lignes filtrées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
