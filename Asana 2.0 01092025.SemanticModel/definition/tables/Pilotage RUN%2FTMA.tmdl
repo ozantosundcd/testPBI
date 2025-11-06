@@ -1,0 +1,408 @@
+/// Données issues du RUN/TMA
+table 'Pilotage RUN/TMA'
+	lineageTag: 7ac1b457-fc8d-40d2-a3b3-f78014ea073d
+
+	column 'Task Assignee Name'
+		dataType: string
+		lineageTag: f8ce5441-9b04-49f0-b9a7-65461e75c21d
+		summarizeBy: none
+		sourceColumn: Task Assignee Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Assignee Id'
+		dataType: string
+		lineageTag: 085c6ff6-2c2e-4faa-9fb9-b1c393002b80
+		summarizeBy: none
+		sourceColumn: Task Assignee Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Assignee Email'
+		dataType: string
+		lineageTag: e01faae8-0fb1-4b6b-8b44-0fbd3db2d6dd
+		summarizeBy: none
+		sourceColumn: Task Assignee Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Completed'
+		dataType: string
+		lineageTag: 68c3448f-359f-4f63-8b71-d48d08d8403a
+		summarizeBy: none
+		sourceColumn: Task Completed
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Completed At'
+		dataType: string
+		lineageTag: 5cf5e1c7-ff2a-4a0e-ad3c-b332aaf3c7c5
+		summarizeBy: none
+		sourceColumn: Task Completed At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Created At'
+		dataType: string
+		lineageTag: 65435a0f-d8dd-4583-9126-6de88481bda1
+		summarizeBy: none
+		sourceColumn: Task Created At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Due At'
+		dataType: string
+		lineageTag: c645e172-aeda-4fe8-ad7a-1221b6e5a2cd
+		summarizeBy: none
+		sourceColumn: Task Due At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Start On'
+		dataType: string
+		lineageTag: 8321f301-3ac9-45ff-a0e7-7ca43762b42e
+		summarizeBy: none
+		sourceColumn: Task Start On
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Type'
+		dataType: string
+		lineageTag: b2d2f3fe-118e-4bcd-9dd6-bbf15baf56dc
+		summarizeBy: none
+		sourceColumn: Task Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Id'
+		dataType: string
+		lineageTag: 562d0c04-02e6-41fa-b686-d8749d682dad
+		summarizeBy: none
+		sourceColumn: Task Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Section Id'
+		dataType: string
+		lineageTag: 87e45ab2-138d-4614-b9a1-cb73bb04d3a4
+		summarizeBy: none
+		sourceColumn: Task Section Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Section Name'
+		dataType: string
+		lineageTag: d465d662-761d-4942-a6c5-1aa48df7599b
+		summarizeBy: none
+		sourceColumn: Task Section Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Modified At'
+		dataType: string
+		lineageTag: 8cf06c83-123d-43d2-ac04-f1fc42b408ac
+		summarizeBy: none
+		sourceColumn: Task Modified At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Name'
+		dataType: string
+		lineageTag: 939b2ff0-b305-4862-85e2-f96d83ceef70
+		summarizeBy: none
+		sourceColumn: Task Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Number Of Likes'
+		dataType: string
+		lineageTag: 77d01775-1098-499e-b5d4-fe7203161cec
+		summarizeBy: none
+		sourceColumn: Task Number Of Likes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Actual Time Minutes'
+		dataType: string
+		lineageTag: df2409d8-1899-4350-b68c-5814e7db4581
+		summarizeBy: none
+		sourceColumn: Task Actual Time Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Current Status Color'
+		dataType: string
+		lineageTag: 25bd6ebd-164e-4327-ba43-1f7173072301
+		summarizeBy: none
+		sourceColumn: Project Current Status Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Current Status Text'
+		dataType: string
+		lineageTag: 5856ea90-93e9-48bc-8ce5-9faa59e3bdcd
+		summarizeBy: none
+		sourceColumn: Project Current Status Text
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Current Status Posted On'
+		dataType: string
+		lineageTag: a7c61654-88b0-42a6-a3a6-7645374019e9
+		summarizeBy: none
+		sourceColumn: Project Current Status Posted On
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Current Status Posted By'
+		dataType: string
+		lineageTag: 56f7e813-d9fc-4ce3-b1e3-0534d758d417
+		summarizeBy: none
+		sourceColumn: Project Current Status Posted By
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Data Archived'
+		dataType: string
+		lineageTag: 0e5805ec-738e-4198-9d9f-331c2c536bf5
+		summarizeBy: none
+		sourceColumn: Project Data Archived
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Id'
+		dataType: string
+		lineageTag: 494c5da7-574a-410c-8c4e-2bec16a291b8
+		summarizeBy: none
+		sourceColumn: Project Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Color'
+		dataType: string
+		lineageTag: f8c1a947-1df7-4627-b628-d8d99b537794
+		summarizeBy: none
+		sourceColumn: Project Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Created At'
+		dataType: string
+		lineageTag: 8674486e-cba6-413c-924c-22211d874a91
+		summarizeBy: none
+		sourceColumn: Project Created At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Modified At'
+		dataType: string
+		lineageTag: 2fb217aa-0d86-47af-98cc-06f93764786e
+		summarizeBy: none
+		sourceColumn: Project Modified At
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Name'
+		dataType: string
+		lineageTag: 8062bd77-f028-40ee-97bf-c59113ba8e8a
+		summarizeBy: none
+		sourceColumn: Project Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Notes'
+		dataType: string
+		lineageTag: f138aa1b-046e-4f35-a1fa-72e837b66298
+		summarizeBy: none
+		sourceColumn: Project Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Owner Name'
+		dataType: string
+		lineageTag: a4762e50-8472-4ab5-950e-ad426b7b816a
+		summarizeBy: none
+		sourceColumn: Project Owner Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Public'
+		dataType: string
+		lineageTag: d6acdfaf-127c-441a-858f-e34ad7c5c310
+		summarizeBy: none
+		sourceColumn: Project Public
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Due On'
+		dataType: string
+		lineageTag: 1db380cc-3b56-4436-b060-b4ce85e79d6f
+		summarizeBy: none
+		sourceColumn: Project Due On
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Start On'
+		dataType: string
+		lineageTag: b2695eb8-5ed9-4311-ba35-03b107480866
+		summarizeBy: none
+		sourceColumn: Project Start On
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Project Custom Fields'
+		dataType: string
+		lineageTag: fa015708-a7d1-4fd2-ac7d-7d3eb3ed8685
+		summarizeBy: none
+		sourceColumn: Project Custom Fields
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workspace Name'
+		dataType: string
+		lineageTag: c1f1d6d4-ca53-4379-9a02-3bdf3e1b186d
+		summarizeBy: none
+		sourceColumn: Workspace Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Team Name'
+		dataType: string
+		lineageTag: 905f9f55-4ff0-4e49-a72c-a8d26937bbfd
+		summarizeBy: none
+		sourceColumn: Team Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Statut TMA'
+		dataType: string
+		lineageTag: fafb0572-7b1f-4c10-a03f-c45fb99f36de
+		summarizeBy: none
+		sourceColumn: Statut TMA
+
+		annotation SummarizationSetBy = Automatic
+
+	column DECI
+		dataType: string
+		lineageTag: 046d4572-2197-44aa-9a18-272839d948aa
+		summarizeBy: none
+		sourceColumn: DECI
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estimated time'
+		dataType: string
+		lineageTag: 332419d0-9286-4764-89fe-2fa1f3083123
+		summarizeBy: none
+		sourceColumn: Estimated time
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nb tâches complétées TMA' = ```
+			
+			IF('Pilotage RUN/TMA'[Task Completed] = "TRUE", 1, 0)
+			
+			```
+		formatString: 0
+		lineageTag: df7cd220-7784-455c-ab3e-02de97073c35
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Urgence
+		dataType: string
+		lineageTag: 96f1b5d1-37ff-4c9a-8f46-49dafd6473cd
+		summarizeBy: none
+		sourceColumn: Urgence
+
+		annotation SummarizationSetBy = Automatic
+
+	column Environnement(s)
+		dataType: string
+		lineageTag: 641bb4fb-e77c-483e-9ccd-58bb6b2dbcd7
+		summarizeBy: none
+		sourceColumn: Environnement(s)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Type Intervention TMA'
+		dataType: string
+		lineageTag: f5c7f932-f28f-4339-9277-697fc53bd8e7
+		summarizeBy: none
+		sourceColumn: Type Intervention TMA
+
+		annotation SummarizationSetBy = Automatic
+
+	column Outil(s)
+		dataType: string
+		lineageTag: 8623fcbe-c77f-4ee5-9172-c4ed028ee2f6
+		summarizeBy: none
+		sourceColumn: Outil(s)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Created Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6ec94f61-c5f6-4c89-b6d3-f64cbd8cafdf
+		summarizeBy: none
+		sourceColumn: Task Created Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Client =
+			
+			LOOKUPVALUE(
+			    'Temps renseignés'[Client],
+			    'Temps renseignés'[Task_GID],
+			    RELATED('Bridge Tasks'[Task Id])
+			)
+		lineageTag: 41ccbb73-7fce-47eb-a5f5-cb09529dadd1
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Support Logiciel'
+		dataType: string
+		lineageTag: a4af0d6f-ebb2-4223-94da-7f079e6d10f2
+		summarizeBy: none
+		sourceColumn: Support Logiciel
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Pilotage RUN/TMA' = m
+		mode: import
+		source =
+				let
+				    Source = Asana.Tables("https://app.asana.com/0/1207972602620291"),
+				    Tasks1 = Source{[Name="Tasks"]}[Data],
+				    #"Custom Fields développé" = Table.ExpandListColumn(Tasks1, "Custom Fields"),
+				    #"Custom Fields développé1" = Table.ExpandRecordColumn(#"Custom Fields développé", "Custom Fields", {"name", "value"}, {"Custom Fields.name", "Custom Fields.value"}),
+				    #"Colonnes supprimées1" = Table.RemoveColumns(#"Custom Fields développé1",{"Tags"}),
+				    #"Colonne dynamique" = Table.Pivot(#"Colonnes supprimées1", List.Distinct(#"Colonnes supprimées1"[#"Custom Fields.name"]), "Custom Fields.name", "Custom Fields.value"),
+				    #"Doublons supprimés" = Table.Distinct(#"Colonne dynamique"),
+				    #"Valeur remplacée" = Table.ReplaceValue(#"Doublons supprimés",null,"Non indiqué",Replacer.ReplaceValue,{"Outil(s)"}),
+				    #"Fractionner la colonne par délimiteur" = Table.SplitColumn(#"Valeur remplacée", "Outil(s)", Splitter.SplitTextByDelimiter(",", QuoteStyle.Csv), {"Outil(s).1", "Outil(s).2", "Outil(s).3"}),
+				    #"Lignes filtrées" = Table.SelectRows(#"Fractionner la colonne par délimiteur", each true),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Lignes filtrées",{{"Outil(s).1", type text}, {"Outil(s).2", type text}, {"Outil(s).3", type text}}),
+				    #"Tableau croisé dynamique des colonnes supprimé" = Table.UnpivotOtherColumns(#"Type modifié", {"Task Assignee Name", "Task Assignee Id", "Task Assignee Email", "Task Completed", "Task Completed At", "Task Created At", "Task Due At", "Task Start On", "Task Type", "Task Id", "Task Section Id", "Task Section Name", "Task Modified At", "Task Name", "Task Number Of Likes", "Task Actual Time Minutes", "Project Current Status Color", "Project Current Status Text", "Project Current Status Posted On", "Project Current Status Posted By", "Project Data Archived", "Project Id", "Project Color", "Project Created At", "Project Modified At", "Project Name", "Project Notes", "Project Owner Name", "Project Public", "Project Due On", "Project Start On", "Project Custom Fields", "Workspace Name", "Team Name", "Statut TMA", "DECI", "Urgence", "Environnement(s)", "Type Intervention TMA", "Estimated time","Support Logiciel"}, "Attribut", "Valeur"),
+				    #"Colonnes supprimées" = Table.RemoveColumns(#"Tableau croisé dynamique des colonnes supprimé",{"Attribut"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Colonnes supprimées",{{"Valeur", "Outil(s)"}}),
+				    #"Valeur remplacée1" = Table.ReplaceValue(#"Colonnes renommées","Non indiqué",null,Replacer.ReplaceValue,{"Outil(s)"}),
+				    #"Colonne personnalisée ajoutée" = Table.AddColumn(#"Valeur remplacée1", "Task Created Date", each Text.Combine({DateTime.ToText(DateTime.From([Task Created At]), "dd"), "/", DateTime.ToText(DateTime.From([Task Created At]), "MM"), "/", DateTime.ToText(DateTime.From([Task Created At]), "yyyy")}), type text),
+				    #"Type modifié1" = Table.TransformColumnTypes(#"Colonne personnalisée ajoutée",{{"Task Created Date", type date}, {"Task Completed", type text}}),
+				    #"Valeur remplacée2" = Table.ReplaceValue(#"Type modifié1","false","FALSE",Replacer.ReplaceText,{"Task Completed"}),
+				    #"Valeur remplacée3" = Table.ReplaceValue(#"Valeur remplacée2","true","TRUE",Replacer.ReplaceText,{"Task Completed"}),
+				    #"Valeur remplacée4" = Table.ReplaceValue(#"Valeur remplacée3",null,"Non renseigné",Replacer.ReplaceValue,{"Outil(s)"}),
+				    #"Valeur remplacée5" = Table.ReplaceValue(#"Valeur remplacée4",null,"Non renseigné",Replacer.ReplaceValue,{"Type Intervention TMA"}),
+				    #"Lignes filtrées1" = Table.SelectRows(#"Valeur remplacée5", each true),
+				    #"Valeur remplacée6" = Table.ReplaceValue(#"Lignes filtrées1",null,"Non indiqué",Replacer.ReplaceValue,{"Support Logiciel"})
+				in
+				    #"Valeur remplacée6"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

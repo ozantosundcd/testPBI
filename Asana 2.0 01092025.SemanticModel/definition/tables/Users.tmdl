@@ -1,0 +1,62 @@
+table Users
+	lineageTag: 62ea73c7-4404-44c8-8380-df24a0357b1e
+
+	column 'User ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3293bde9-a48c-4ee1-a1ab-bc96fc4b8607
+		summarizeBy: none
+		sourceColumn: User ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Name'
+		dataType: string
+		lineageTag: de5d9b7d-14a5-4584-a7c7-abb778115393
+		summarizeBy: none
+		sourceColumn: User Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Type'
+		dataType: string
+		lineageTag: e4d1cc38-53db-4ca9-95da-c5aa4f296ed8
+		summarizeBy: none
+		sourceColumn: User Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FLAG TMA' = ```
+			
+			IF(
+			    NOT(ISBLANK(
+			        LOOKUPVALUE('Temps renseignés'[Created_By.GID], 'Temps renseignés'[Created_By.GID], 'Users'[User ID])
+			    )),
+			    "Oui",
+			    "Non"
+			)
+			
+			```
+		lineageTag: 05b9770e-35c1-46d0-82cc-83ed919bd630
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Users = m
+		mode: import
+		source =
+				let
+				    Source = Json.Document(Web.Contents("https://app.asana.com/api/1.0/workspaces/250158174658607/users", [Headers=[Authorization="Bearer 2/1209801102604181/1210686810106085:ada4fdc0d1efde96d2015482da6ef0ea
+				"]])),
+				    #"Converted to Table" = Table.FromRecords({Source}),
+				    #"Expanded data" = Table.ExpandListColumn(#"Converted to Table", "data"),
+				    #"Expanded data1" = Table.ExpandRecordColumn(#"Expanded data", "data", {"gid", "name", "resource_type"}, {"data.gid", "data.name", "data.resource_type"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Expanded data1",{{"data.gid" , Int64.Type}, {"data.name", type text}, {"data.resource_type", type text}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"data.gid", "User ID"}, {"data.name", "User Name"}, {"data.resource_type", "User Type"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

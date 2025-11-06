@@ -1,0 +1,50 @@
+table 'Valeur ou %'
+	isHidden
+	lineageTag: a8dacc7c-d99e-4a36-971f-47648520a34a
+
+	column 'Valeur ou %'
+		isHidden
+		lineageTag: 131c9cee-a2c7-480e-be27-d0757f12d651
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Valeur ou % Commande'
+
+		relatedColumnDetails
+			groupByColumn: 'Valeur ou % Champs'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Valeur ou % Champs'
+		isHidden
+		lineageTag: 429fee64-b29a-4aa7-83cc-fba3e733a44b
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Valeur ou % Commande'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Valeur ou % Commande'
+		isHidden
+		formatString: 0
+		lineageTag: 1b9f3b08-b2b4-4186-8922-8e666ebbea28
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Valeur ou %' = calculated
+		mode: import
+		source =
+				{
+				    ("Nb tâches cumulées", NAMEOF('KPI'[Nb tâches cumulées]), 0),
+				    ("Nb tâches complétées", NAMEOF('KPI'[Nb tâches complétées]), 1)
+				}
+
+	annotation PBI_Id = 094767eea8e54c308cd07a6c15c86e15
+

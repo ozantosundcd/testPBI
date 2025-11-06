@@ -3,16 +3,13 @@ model Model
 	defaultPowerBIDataSourceVersion: powerBI_V3
 	sourceQueryCulture: fr-FR
 	dataAccessOptions
+		fastCombine
 		legacyRedirects
 		returnErrorValuesAsNull
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBIDesktopVersion = 2.146.7760.5 (Main)+66388751dd2267dcf0f187a5e5cffc55ee51e2fe
-
 annotation PBI_QueryOrder = ["Pilotage RUN/TMA","KPI","Users","Temps renseignés","Taux Occup","Bridge Tasks","Référentiel clients","Interventions ponctuelles"]
-
-annotation PBI_ProTooling = ["WebModelingEdit"]
 
 ref table KPI
 ref table Users

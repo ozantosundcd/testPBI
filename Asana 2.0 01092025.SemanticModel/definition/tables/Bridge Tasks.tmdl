@@ -1,0 +1,63 @@
+/// Données issues du RUN/TMA
+table 'Bridge Tasks'
+	lineageTag: dce0c130-b3b4-4d99-b1ad-736634e2fdb6
+
+	column 'Task Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: be1d8343-bf96-4633-ad36-54028502872f
+		summarizeBy: none
+		sourceColumn: Task Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task Name'
+		dataType: string
+		lineageTag: 2c53fa08-d933-41c6-a84a-e2eed88ff66c
+		summarizeBy: none
+		sourceColumn: Task Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DECI
+		dataType: string
+		lineageTag: 44a14345-bba8-443f-8c56-31e519e9d8cc
+		summarizeBy: none
+		sourceColumn: DECI
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Bridge Tasks' = m
+		mode: import
+		source =
+				let
+				    Source = Asana.Tables("https://app.asana.com/0/1207972602620291"),
+				    Tasks1 = Source{[Name="Tasks"]}[Data],
+				    #"Custom Fields développé" = Table.ExpandListColumn(Tasks1, "Custom Fields"),
+				    #"Custom Fields développé1" = Table.ExpandRecordColumn(#"Custom Fields développé", "Custom Fields", {"name", "value"}, {"Custom Fields.name", "Custom Fields.value"}),
+				    #"Colonnes supprimées1" = Table.RemoveColumns(#"Custom Fields développé1",{"Tags"}),
+				    #"Colonne dynamique" = Table.Pivot(#"Colonnes supprimées1", List.Distinct(#"Colonnes supprimées1"[#"Custom Fields.name"]), "Custom Fields.name", "Custom Fields.value"),
+				    #"Doublons supprimés" = Table.Distinct(#"Colonne dynamique"),
+				    #"Valeur remplacée" = Table.ReplaceValue(#"Doublons supprimés",null,"Non indiqué",Replacer.ReplaceValue,{"Outil(s)"}),
+				    #"Fractionner la colonne par délimiteur" = Table.SplitColumn(#"Valeur remplacée", "Outil(s)", Splitter.SplitTextByDelimiter(",", QuoteStyle.Csv), {"Outil(s).1", "Outil(s).2", "Outil(s).3"}),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Fractionner la colonne par délimiteur",{{"Outil(s).1", type text}, {"Outil(s).2", type text}, {"Outil(s).3", type text}}),
+				    #"Tableau croisé dynamique des colonnes supprimé" = Table.UnpivotOtherColumns(#"Type modifié", {"Task Assignee Name", "Task Assignee Id", "Task Assignee Email", "Task Completed", "Task Completed At", "Task Created At", "Task Due At", "Task Start On", "Task Type", "Task Id", "Task Section Id", "Task Section Name", "Task Modified At", "Task Name", "Task Number Of Likes", "Task Actual Time Minutes", "Project Current Status Color", "Project Current Status Text", "Project Current Status Posted On", "Project Current Status Posted By", "Project Data Archived", "Project Id", "Project Color", "Project Created At", "Project Modified At", "Project Name", "Project Notes", "Project Owner Name", "Project Public", "Project Due On", "Project Start On", "Project Custom Fields", "Workspace Name", "Team Name", "Statut TMA", "DECI", "Urgence", "Environnement(s)", "Type Intervention TMA", "Estimated time"}, "Attribut", "Valeur"),
+				    #"Colonnes supprimées" = Table.RemoveColumns(#"Tableau croisé dynamique des colonnes supprimé",{"Attribut"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Colonnes supprimées",{{"Valeur", "Outil(s)"}}),
+				    #"Valeur remplacée1" = Table.ReplaceValue(#"Colonnes renommées","Non indiqué",null,Replacer.ReplaceValue,{"Outil(s)"}),
+				    #"Autres colonnes supprimées" = Table.SelectColumns(#"Valeur remplacée1",{"Task Id", "Task Name", "DECI"}),
+				    #"Doublons supprimés1" = Table.Distinct(#"Autres colonnes supprimées", {"Task Id"}),
+				    #"Type modifié1" = Table.TransformColumnTypes(#"Doublons supprimés1",{{"Task Id", Int64.Type}})
+				in
+				    #"Type modifié1"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

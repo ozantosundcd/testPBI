@@ -1,0 +1,270 @@
+table 'Temps renseignés'
+	lineageTag: 89cb4017-ee67-4214-895f-e348ffad20e1
+
+	measure Catégorie_Client_Temps = ```
+			
+			VAR ClientNom = SELECTEDVALUE('Temps renseignés'[Client])
+			VAR MoisSelectionne = SELECTEDVALUE('CalendarTable'[Year Month])
+			
+			VAR TotalJours =
+			    CALCULATE(
+			        SUM('Temps renseignés'[Duration_Days]),
+			        'CalendarTable'[Year Month] = MoisSelectionne
+			    )
+			
+			RETURN
+			    ClientNom & " - " & FORMAT(TotalJours, "0.000") & " j"
+			
+			```
+		lineageTag: de7214fa-dcd9-480e-8ef4-3d5bccebd754
+
+	column Client
+		dataType: string
+		lineageTag: 5f186d1b-b792-49ad-add6-ec6f731f0d8a
+		summarizeBy: none
+		sourceColumn: Client
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date de création'
+		dataType: dateTime
+		formatString: Dd Mmmm yyyy
+		lineageTag: 6eed2e46-4f53-4000-84c3-403dd8057494
+		summarizeBy: none
+		sourceColumn: Date de création
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column Duration_Hours = DIVIDE([Duration_Minutes], 60)
+		dataType: double
+		formatString: 0.00
+		lineageTag: 34de6d9c-b37d-4dfa-97f0-8de3b4f96655
+		summarizeBy: none
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = User
+
+	column Duration_Days = DIVIDE([duration_Hours], 8)
+		formatString: #,0.000
+		lineageTag: 59e45879-b50b-4d76-8e09-d041608edf5a
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Client_Temps
+		dataType: string
+		lineageTag: e7f5e709-27d7-4229-9537-df1045af860c
+		summarizeBy: none
+		sourceColumn: Client_Temps
+
+		annotation SummarizationSetBy = Automatic
+
+	column Task_GID
+		dataType: int64
+		formatString: 0
+		lineageTag: b82acb8c-049b-4d72-9d85-041981c2c8c7
+		summarizeBy: none
+		sourceColumn: Task_GID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nom Tâche'
+		dataType: string
+		lineageTag: 0d4a7931-6bfe-4ce6-8824-695a495e7dac
+		summarizeBy: none
+		sourceColumn: Nom Tâche
+
+		annotation SummarizationSetBy = Automatic
+
+	column Duration_Minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: 2dd8455e-0568-4854-8b10-3f2a4a62a3ff
+		summarizeBy: sum
+		sourceColumn: Duration_Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Heures Journalières'
+		dataType: double
+		lineageTag: 417e55f4-73a9-4223-a66d-2f3b2610ea35
+		summarizeBy: sum
+		sourceColumn: Heures Journalières
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Created_By.GID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 175ba4f4-7229-4e6f-8503-d785a11caed0
+		summarizeBy: none
+		sourceColumn: Created_By.GID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Collaborateur
+		dataType: string
+		lineageTag: 72671536-1ada-49a1-896c-42a52fe8bbd7
+		summarizeBy: none
+		sourceColumn: Collaborateur
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Created_By.Resource_Type'
+		dataType: string
+		lineageTag: 1bdd0169-b623-4b92-9b84-15f21d6c1ddb
+		summarizeBy: none
+		sourceColumn: Created_By.Resource_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Type Intervention TMA' =
+			
+			VAR t_text = TRIM( FORMAT( 'Temps renseignés'[Task_GID], "" ) )
+			VAR res =
+			    CALCULATE(
+			        FIRSTNONBLANK( 'Pilotage RUN/TMA'[Type intervention TMA], 1 ),
+			        FILTER(
+			            'Pilotage RUN/TMA',
+			            TRIM( FORMAT( 'Pilotage RUN/TMA'[Task Id], "" ) ) = t_text
+			        )
+			    )
+			RETURN
+			IF( ISBLANK(res), "Non renseigné", res )
+		lineageTag: a58b671c-8a5a-4e41-8465-79fab7615c44
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Support Logiciel' =
+			
+			VAR t_text = TRIM( FORMAT( 'Temps renseignés'[Task_GID], "" ) )
+			VAR res =
+			    CALCULATE(
+			        FIRSTNONBLANK( 'Pilotage RUN/TMA'[Support Logiciel], 1 ),
+			        FILTER(
+			            'Pilotage RUN/TMA',
+			            TRIM( FORMAT( 'Pilotage RUN/TMA'[Task Id], "" ) ) = t_text
+			        )
+			    )
+			RETURN
+			res
+		lineageTag: f925a154-5dff-4933-a8b0-2035d26503a4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Temps renseignés' = m
+		mode: import
+		source = ```
+				let
+				    BaseUrl = "https://app.asana.com",
+				    PAT = "Bearer 2/1209801102604181/1210686810106085:ada4fdc0d1efde96d2015482da6ef0ea",
+				
+				    PortfolioGID = "1208519079710275",
+				
+				    ProjectsResponse = Json.Document(Web.Contents(
+				        BaseUrl, 
+				        [
+				            RelativePath = "/api/1.0/portfolios/" & PortfolioGID & "/items",
+				            Headers = [ Authorization = PAT ]
+				        ]
+				    )),
+				    
+				    Projects = ProjectsResponse[data],
+				
+				    GetTasksForProject = (Project as record) =>
+				        let
+				            ProjectGID = Project[gid],
+				            ProjectName = Project[name],
+				            TasksResponse = try Json.Document(Web.Contents(
+				                BaseUrl, 
+				                [
+				                    RelativePath = "/api/1.0/projects/" & ProjectGID & "/tasks",
+				                    Headers = [ Authorization = PAT ]
+				                ]
+				            )) otherwise null,
+				            Tasks = if TasksResponse <> null then Table.FromList(TasksResponse[data], Splitter.SplitByNothing(), {"Task"}) else #table({}, {}), 
+				            ExpandedTasks = if Table.RowCount(Tasks) > 0 then Table.ExpandRecordColumn(Tasks, "Task", {"gid", "name"}) else Tasks
+				        in
+				            Table.AddColumn(ExpandedTasks, "Project Name", each ProjectName),
+				
+				    AllTasks = Table.Combine(List.Transform(Projects, each GetTasksForProject(_))),
+				
+				    GetTimeEntriesForTask = (Task as record) =>
+				        let
+				            TaskGID = Task[gid],
+				            TaskName = Task[name],
+				            TimeEntriesResponse = try Json.Document(Web.Contents(
+				                BaseUrl, 
+				                [
+				                    RelativePath = "/api/1.0/tasks/" & TaskGID & "/time_tracking_entries",
+				                    Headers = [ Authorization = PAT ]
+				                ]
+				            )) otherwise null,
+				            TimeEntries = if TimeEntriesResponse <> null then TimeEntriesResponse[data] else null,
+				            EntriesTable = if TimeEntries <> null then Table.FromList(TimeEntries, Splitter.SplitByNothing(), {"Entry"}) else #table({}, {}),
+				            ExpandedEntries = if Table.RowCount(EntriesTable) > 0 then Table.ExpandRecordColumn(EntriesTable, "Entry", {"duration_minutes", "entered_on", "created_by"}) else EntriesTable
+				        in
+				            ExpandedEntries,
+				
+				    TimeEntriesTable = Table.AddColumn(AllTasks, "Time Entries", each GetTimeEntriesForTask(_)),
+				    FinalTable = Table.ExpandTableColumn(TimeEntriesTable, "Time Entries", {"duration_minutes", "entered_on", "created_by"}),
+				    #"Expanded created_by" = Table.ExpandRecordColumn(FinalTable, "created_by", {"gid", "name", "resource_type"}, {"created_by.gid", "created_by.name", "created_by.resource_type"}),
+				
+				    #"Renamed Columns" = Table.RenameColumns(#"Expanded created_by", {
+				        {"gid", "Task_GID"},
+				        {"name", "Nom Tâche"},
+				        {"Project Name", "Client"},
+				        {"duration_minutes", "Duration_Minutes"},
+				        {"entered_on", "Date de création"},
+				        {"created_by.gid", "Created_By.GID"},
+				        {"created_by.name", "Collaborateur"},
+				        {"created_by.resource_type", "Created_By.Resource_Type"}
+				    }),
+				
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns", {
+				        {"Task_GID", Int64.Type},
+				        {"Nom Tâche", type text},
+				        {"Client", type text},
+				        {"Duration_Minutes", Int64.Type},
+				        {"Date de création", type date},
+				        {"Created_By.GID", Int64.Type},
+				        {"Collaborateur", type text},
+				        {"Created_By.Resource_Type", type text}
+				    }),
+				
+				    #"Replaced Value" = Table.ReplaceValue(#"Changed Type", "[", "", Replacer.ReplaceText, {"Client"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value", "]", "", Replacer.ReplaceText, {"Client"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1", " RUN", "", Replacer.ReplaceText, {"Client"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2", " TMA", "", Replacer.ReplaceText, {"Client"}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3", " Ticketing", "", Replacer.ReplaceText, {"Client"}),
+				
+				    #"Personnalisée ajoutée" = Table.AddColumn(#"Replaced Value4", "Heures", each [Duration_Minutes] / 60),
+				    #"Personnalisée ajoutée1" = Table.AddColumn(#"Personnalisée ajoutée", "Heures Journalières", each [Duration_Minutes] / 480),
+				    #"Colonnes permutées" = Table.ReorderColumns(#"Personnalisée ajoutée1", {
+				        "Task_GID", "Nom Tâche", "Client", "Duration_Minutes", "Heures Journalières", "Date de création",
+				        "Created_By.GID", "Collaborateur", "Created_By.Resource_Type", "Heures"
+				    }),
+				
+				    #"Personnalisée ajoutée2" = Table.AddColumn(#"Colonnes permutées", "Client_Temps", each [Client] & " - " & Number.ToText([Heures Journalières])),
+				
+				    #"Colonnes supprimées" = Table.RemoveColumns(#"Personnalisée ajoutée2", {"Heures"}),
+				    #"Lignes filtrées" = Table.SelectRows(#"Colonnes supprimées", each true),
+				    #"Valeur remplacée" = Table.ReplaceValue(#"Lignes filtrées","Val Oise Habitat Ticketing","Val Oise Habitat",Replacer.ReplaceText,{"Client"}),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Valeur remplacée",{{"Heures Journalières", type number}})
+				in
+				    #"Type modifié"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

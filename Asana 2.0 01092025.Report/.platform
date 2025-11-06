@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Asana 2.0 01092025"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "70662fe8-40ed-aab4-4280-c3d5f9fd85e8"
+  }
+}
